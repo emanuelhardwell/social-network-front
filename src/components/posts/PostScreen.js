@@ -1,9 +1,11 @@
 import React from "react";
+import { Navbar } from "../ui/Navbar";
 
 export const PostScreen = () => {
   return (
-    <div>
+    <>
+      <Navbar />
       <h1>PostScreen</h1>
-    </div>
+    </>
   );
 };
