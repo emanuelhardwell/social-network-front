@@ -1,9 +1,12 @@
 import React from "react";
+import { Register } from "../components/auth/Register";
+// import { Login } from "../components/auth/Login";
 
 export const AppRouter = () => {
   return (
-    <div>
-      <h1>AppRouter</h1>
-    </div>
+    <>
+      {/* <Login /> */}
+      <Register />
+    </>
   );
 };
