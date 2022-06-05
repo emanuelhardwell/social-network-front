@@ -13,11 +13,14 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { startLogout } from "../../actions/authActions";
 
 // const pages = ["Home", "Pricing", "Blog"];
-const settings = ["Perfil", "Cuenta", "Dashboard", "Salir"];
+// const settings = ["Perfil", "Cuenta", "Dashboard", "Salir"];
 
 export const Navbar = () => {
+  const dispatch = useDispatch();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -34,6 +37,10 @@ export const Navbar = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleLogout = () => {
+    dispatch(startLogout());
   };
 
   return (
@@ -171,11 +178,19 @@ export const Navbar = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
+                {/* {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
-                ))}
+                ))} */}
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">Perfil </Typography>
+                </MenuItem>
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center" onClick={handleLogout}>
+                    Salir{" "}
+                  </Typography>
+                </MenuItem>
               </Menu>
             </Box>
           </Toolbar>
