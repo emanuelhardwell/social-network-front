@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import { useSelector } from "react-redux";
-import { IconButton } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { IconButton, Typography } from "@mui/material";
+import { startPostLiked } from "../../actions/postActions";
 
-export const LikeButton = ({ likes }) => {
+export const LikeButton = ({ likes, idPost }) => {
   const { uid } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const [buttonDisabled, setButtonDisable] = useState(false);
   //   const { posts } = useSelector((state) => state.posts);
 
   const verifyLike = () => {
@@ -18,15 +21,33 @@ export const LikeButton = ({ likes }) => {
     }
   };
 
+  const handleClickLike = (id) => {
+    setButtonDisable(true);
+    dispatch(startPostLiked(id));
+    setTimeout(() => {
+      setButtonDisable(false);
+    }, 2000);
+  };
+
   return (
     <>
-      <IconButton aria-label="add to favorites">
-        {verifyLike() ? <ThumbUpIcon /> : <ThumbUpOutlinedIcon />}
+      <IconButton
+        disabled={buttonDisabled}
+        aria-label="add to favorites"
+        onClick={() => handleClickLike(idPost)}
+      >
+        {verifyLike() ? (
+          <ThumbUpIcon color="primary" />
+        ) : (
+          <ThumbUpOutlinedIcon color="primary" />
+        )}
         {""}
-        {console.log(verifyLike())}
       </IconButton>
 
-      <span> {likes.length > 0 ? likes.length : ""}</span>
+      <Typography component="span">
+        {" "}
+        {likes.length > 0 ? likes.length : ""}
+      </Typography>
     </>
   );
 };

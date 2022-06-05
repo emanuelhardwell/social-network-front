@@ -71,7 +71,7 @@ export const PostScreen = () => {
                   </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
-                  <LikeButton likes={post.likes} />
+                  <LikeButton likes={post.likes} idPost={post._id} />
 
                   <IconButton aria-label="share">
                     <ShareIcon />
