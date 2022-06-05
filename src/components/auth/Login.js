@@ -18,6 +18,9 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Link as LinkRouter } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { startLogin } from "../../actions/authActions";
+import Swal from "sweetalert2";
 
 const Copyright = (props) => {
   return (
@@ -39,10 +42,11 @@ const Copyright = (props) => {
 
 const initialState = {
   email: "ema@gmail.com",
-  password: "emanuel123",
+  password: "emanuel100",
 };
 
 export const Login = () => {
+  const dispatch = useDispatch();
   const [formValues, setFormValues] = useState(initialState);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -54,8 +58,10 @@ export const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submit");
-    console.log(formValues);
+    if (email.trim() === "" || password.trim() === "") {
+      return Swal.fire("Error", "Ingresa el correo y la contraseña", "error");
+    }
+    dispatch(startLogin(formValues));
   };
 
   const handleClickShowPassword = () => {

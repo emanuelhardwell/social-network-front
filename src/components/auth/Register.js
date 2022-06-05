@@ -18,6 +18,9 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Link as LinkRouter } from "react-router-dom";
+import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { startRegister } from "../../actions/authActions";
 
 const Copyright = (props) => {
   return (
@@ -42,11 +45,12 @@ const initialState = {
   lastname: "lopez",
   lastname2: "sanchez",
   email: "ema@gmail.com",
-  password: "emanuel123",
-  password2: "emanuel123",
+  password: "emanuel100",
+  password2: "emanuel100",
 };
 
 export const Register = () => {
+  const dispatch = useDispatch();
   const [formValues, setFormValues] = useState(initialState);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -58,8 +62,20 @@ export const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submit");
-    console.log(formValues);
+
+    if (
+      name.trim() === "" ||
+      lastname.trim() === "" ||
+      lastname2.trim() === "" ||
+      email.trim() === ""
+    ) {
+      return Swal.fire("Error", "Ingresa todos los datos", "error");
+    }
+
+    if (password !== password2) {
+      return Swal.fire("Error", "Las contraseñas no coinciden", "error");
+    }
+    dispatch(startRegister(formValues));
   };
 
   const handleClickShowPassword = () => {
