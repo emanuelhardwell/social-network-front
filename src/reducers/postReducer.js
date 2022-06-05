@@ -7,6 +7,12 @@ const initialState = {
 
 export const postReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.postsGeted:
+      return {
+        ...state,
+        posts: [...action.payload],
+      };
+
     case types.postAdded:
       return {
         ...state,

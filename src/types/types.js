@@ -6,6 +6,7 @@ export const types = {
   authLogin: "[AUTH] login",
   authLogout: "[AUTH] logout",
 
+  postsGeted: "[POST] geted",
   postAdded: "[POST] added",
   postUpdated: "[POST] updated",
   postDeleted: "[POST] deleted",
