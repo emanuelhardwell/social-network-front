@@ -23,14 +23,22 @@ export const postReducer = (state = initialState, action) => {
       return {
         ...state,
         posts: state.posts.map((post) =>
-          post._id === action.payload.id ? action.payload : post
+          post._id === action.payload._id ? action.payload : post
+        ),
+      };
+
+    case types.postLiked:
+      return {
+        ...state,
+        posts: state.posts.map((post) =>
+          post._id === action.payload._id ? action.payload : post
         ),
       };
 
     case types.postDeleted:
       return {
         ...state,
-        posts: state.posts.filter((post) => post._id !== action.payload.id),
+        posts: state.posts.filter((post) => post._id !== action.payload._id),
       };
 
     case types.postSetActive:
