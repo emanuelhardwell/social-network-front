@@ -38,3 +38,26 @@ export const fetchWithToken = (endpoint, data, method = "GET") => {
     });
   }
 };
+
+export const fetchWithTokenAndFile = (endpoint, data, method = "GET") => {
+  const url = `${urlBase}/${endpoint}`;
+
+  const token = localStorage.getItem("token") || "";
+
+  if (method === "GET") {
+    return fetch(url, {
+      headers: {
+        "x-token": token,
+      },
+    });
+  } else {
+    return fetch(url, {
+      method,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "x-token": token,
+      },
+      body: JSON.stringify(data),
+    });
+  }
+};
