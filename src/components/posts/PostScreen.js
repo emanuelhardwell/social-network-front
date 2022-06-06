@@ -22,6 +22,7 @@ import { es } from "dayjs/locale/es";
 import localeData from "dayjs/plugin/localeData";
 import { capitalizeFirstLetter } from "../../helpers/capitalizeFirstLetter";
 import { LikeButton } from "./LikeButton";
+import { PostForm } from "./PostForm";
 
 var relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
@@ -41,6 +42,7 @@ export const PostScreen = () => {
     <div>
       <Navbar />
       <Container sx={{ mt: 2, mb: 4 }}>
+        <PostForm />
         <Grid container spacing={3}>
           {posts.map((post) => (
             <Grid key={post?._id} item xs={12} sm={6} md={4}>
@@ -66,6 +68,26 @@ export const PostScreen = () => {
                   alt={post?.title}
                 />
                 <CardContent>
+                  <Typography
+                    marginBottom={2}
+                    variant="body1"
+                    color="text.primary"
+                  >
+                    {post?.tags.map((tag) => (
+                      <Typography
+                        color="primary"
+                        variant="text"
+                        fontSize={13}
+                        key={tag}
+                      >
+                        {" "}
+                        #{tag}{" "}
+                      </Typography>
+                    ))}
+                  </Typography>
+                  <Typography variant="body1" color="text.primary">
+                    {capitalizeFirstLetter(post?.title)}
+                  </Typography>
                   <Typography variant="body2" color="text.secondary">
                     {post?.description}
                   </Typography>
