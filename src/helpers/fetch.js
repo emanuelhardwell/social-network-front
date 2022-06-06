@@ -54,10 +54,10 @@ export const fetchWithTokenAndFile = (endpoint, data, method = "GET") => {
     return fetch(url, {
       method,
       headers: {
-        "Content-Type": "multipart/form-data",
+        // "Content-Type": "multipart/form-data",
         "x-token": token,
       },
-      body: JSON.stringify(data),
+      body: data,
     });
   }
 };

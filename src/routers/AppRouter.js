@@ -11,6 +11,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { startAuthCheckingFinish } from "../actions/authActions";
 import { LoadingRoller } from "../components/loaders/LoadingRoller";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export const AppRouter = () => {
   const dispatch = useDispatch();
   const { uid, checking } = useSelector((state) => state.auth);
@@ -50,6 +53,7 @@ export const AppRouter = () => {
           </Switch>
         </div>
       </Router>
+      <ToastContainer />
     </>
   );
 };
