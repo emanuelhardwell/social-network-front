@@ -24,6 +24,7 @@ import { capitalizeFirstLetter } from "../../helpers/capitalizeFirstLetter";
 import { LikeButton } from "./LikeButton";
 import { PostForm } from "./PostForm";
 import { DeleteButton } from "./DeleteButton";
+import { UpdateBotton } from "./UpdateBotton";
 
 var relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
@@ -52,7 +53,8 @@ export const PostScreen = () => {
                 <CardHeader
                   avatar={
                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                      {(post?.user?.name).charAt(0).toUpperCase()}
+                      {post?.user?.name &&
+                        (post?.user?.name).charAt(0).toUpperCase()}
                     </Avatar>
                   }
                   action={
@@ -60,7 +62,9 @@ export const PostScreen = () => {
                       <MoreVertIcon />
                     </IconButton>
                   }
-                  title={capitalizeFirstLetter(post?.user?.name)}
+                  title={
+                    post?.user?.name && capitalizeFirstLetter(post?.user?.name)
+                  }
                   subheader={dayjs(post?.createdAtDate).fromNow()}
                 />
                 <CardMedia
@@ -101,7 +105,10 @@ export const PostScreen = () => {
                     <ShareIcon />
                   </IconButton>
                   {post?.user?._id === uid && (
-                    <DeleteButton idPost={post._id} />
+                    <>
+                      <DeleteButton idPost={post._id} />
+                      <UpdateBotton post={post} />
+                    </>
                   )}
                 </CardActions>
               </Card>

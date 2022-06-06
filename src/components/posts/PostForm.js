@@ -7,14 +7,18 @@ import Typography from "@mui/material/Typography";
 import { useDispatch, useSelector } from "react-redux";
 import { startModalClose, startModalOpen } from "../../actions/modalActions";
 import { Grid, TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import Stack from "@mui/material/Stack";
 import Swal from "sweetalert2";
-import { startPostAdded } from "../../actions/postActions";
+import {
+  postClearActive,
+  startPostAdded,
+  startPostUpdated,
+} from "../../actions/postActions";
 
 const style = {
   position: "absolute",
@@ -40,6 +44,7 @@ const initialState = {
 
 export const PostForm = () => {
   const dispatch = useDispatch();
+  const { postActive } = useSelector((state) => state.posts);
   const { modalOpen } = useSelector((state) => state.modal);
   const [formValues, setFormValues] = useState(initialState);
   const [image, setImage] = useState("");
@@ -71,10 +76,17 @@ export const PostForm = () => {
       return Swal.fire("Error", "Agrege una imagen", "error");
     }
 
-    dispatch(startPostAdded(formData));
-    dispatch(startModalClose());
-    setFormValues(initialState);
-    setImage("");
+    if (postActive) {
+      dispatch(startPostUpdated(formData, postActive._id));
+      dispatch(startModalClose());
+      setFormValues(initialState);
+      setImage("");
+    } else {
+      dispatch(startPostAdded(formData));
+      dispatch(startModalClose());
+      setFormValues(initialState);
+      setImage("");
+    }
   };
 
   const handleFileChange = (e) => {
@@ -86,7 +98,24 @@ export const PostForm = () => {
   };
 
   const handleOpen = () => dispatch(startModalOpen());
-  const handleClose = () => dispatch(startModalClose());
+  const handleClose = () => {
+    dispatch(startModalClose());
+    dispatch(postClearActive());
+    setFormValues(initialState);
+  };
+
+  useEffect(() => {
+    if (postActive) {
+      dispatch(startModalOpen());
+      setFormValues({
+        title: postActive.title,
+        description: postActive.description,
+        tags: postActive.tags.join(),
+      });
+    } else {
+      setFormValues(initialState);
+    }
+  }, [dispatch, postActive]);
 
   return (
     <>

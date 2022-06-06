@@ -57,6 +57,29 @@ export const startPostDeleted = (id) => {
   };
 };
 
+export const startPostUpdated = (post, id) => {
+  return async (dispatch) => {
+    const res = await fetchWithTokenAndFile(`post/${id}`, post, "PUT");
+    const body = await res.json();
+
+    if (body.ok) {
+      dispatch(postUpdated(body.post));
+      toast.success(body.msg);
+    } else {
+      Swal.fire("Error", body.msg, "error");
+    }
+  };
+};
+
+export const postSetActive = (post) => ({
+  type: types.postSetActive,
+  payload: post,
+});
+
+export const postClearActive = () => ({
+  type: types.postClearActive,
+});
+
 const postDeleted = (id) => ({
   type: types.postDeleted,
   payload: id,
@@ -64,6 +87,11 @@ const postDeleted = (id) => ({
 
 const postAdded = (post) => ({
   type: types.postAdded,
+  payload: post,
+});
+
+const postUpdated = (post) => ({
+  type: types.postUpdated,
   payload: post,
 });
 
