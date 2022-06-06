@@ -53,6 +53,12 @@ export const postReducer = (state = initialState, action) => {
         postActive: null,
       };
 
+    case types.postLogout:
+      return {
+        ...state,
+        posts: [],
+      };
+
     default:
       return state;
   }

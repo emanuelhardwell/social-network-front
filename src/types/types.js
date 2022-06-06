@@ -13,4 +13,5 @@ export const types = {
   postLiked: "[POST] liked",
   postSetActive: "[POST] set active",
   postClearActive: "[POST] clear active",
+  postLogout: "[POST] logout",
 };

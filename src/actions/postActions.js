@@ -104,3 +104,7 @@ const postsGeted = (posts) => ({
   type: types.postsGeted,
   payload: posts,
 });
+
+export const postLogout = () => ({
+  type: types.postLogout,
+});
