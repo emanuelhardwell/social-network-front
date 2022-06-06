@@ -23,6 +23,7 @@ import localeData from "dayjs/plugin/localeData";
 import { capitalizeFirstLetter } from "../../helpers/capitalizeFirstLetter";
 import { LikeButton } from "./LikeButton";
 import { PostForm } from "./PostForm";
+import { DeleteButton } from "./DeleteButton";
 
 var relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
@@ -33,6 +34,7 @@ dayjs.extend(localeData);
 export const PostScreen = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.posts);
+  const { uid } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(getPosts());
@@ -98,6 +100,9 @@ export const PostScreen = () => {
                   <IconButton aria-label="share">
                     <ShareIcon />
                   </IconButton>
+                  {post?.user?._id === uid && (
+                    <DeleteButton idPost={post._id} />
+                  )}
                 </CardActions>
               </Card>
             </Grid>

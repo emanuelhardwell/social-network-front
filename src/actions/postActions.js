@@ -36,15 +36,31 @@ export const startPostAdded = (post) => {
 
     if (body.ok) {
       dispatch(postAdded(body.post));
-      toast(body.msg, {
-        type: "success",
-        autoClose: 4000,
-      });
+      toast.success(body.msg);
     } else {
       Swal.fire("Error", body.msg, "error");
     }
   };
 };
+
+export const startPostDeleted = (id) => {
+  return async (dispatch) => {
+    const res = await fetchWithToken(`post/${id}`, {}, "DELETE");
+    const body = await res.json();
+
+    if (body.ok) {
+      dispatch(postDeleted(id));
+      toast.success(body.msg, { autoClose: 4000 });
+    } else {
+      Swal.fire("Error", body.msg, "error");
+    }
+  };
+};
+
+const postDeleted = (id) => ({
+  type: types.postDeleted,
+  payload: id,
+});
 
 const postAdded = (post) => ({
   type: types.postAdded,
