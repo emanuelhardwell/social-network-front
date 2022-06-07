@@ -1,12 +1,4 @@
-import {
-  Backdrop,
-  Box,
-  Button,
-  Fade,
-  Grid,
-  Modal,
-  TextField,
-} from "@mui/material";
+import { Backdrop, Box, Button, Fade, Modal, TextField } from "@mui/material";
 import ChipInput from "material-ui-chip-input";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -22,7 +14,7 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 300,
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  // border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
@@ -104,47 +96,40 @@ export const PostSearch = () => {
               }}
             >
               <Box component="form" onSubmit={handleSubmit} noValidate>
-                <Grid container spacing={1} sx={{ alignItems: "center" }}>
-                  <Grid item xs={12}>
-                    <TextField
-                      margin="normal"
-                      // style={{ margin: "10px 0" }}
-                      fullWidth
-                      label="Buscar por título"
-                      onKeyUp={handleKeyUp}
-                      onChange={(e) => setSearchInput(e.target.value)}
-                    />
-                  </Grid>
+                <TextField
+                  margin="normal"
+                  // style={{ margin: "10px 0" }}
+                  fullWidth
+                  label="Buscar por título"
+                  value={searchInput}
+                  onKeyUp={handleKeyUp}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                />
 
-                  <Grid item xs={12}>
-                    <ChipInput
-                      // style={{ height: "56px" }}
-                      margin="normal"
-                      color="primary"
-                      label="Buscar por etiquetas #"
-                      variant="outlined"
-                      fullWidth
-                      // helperText={"Puedes agregar hasta 4 etiquetas"}
-                      value={chipInput}
-                      onAdd={(chip) => handleAddChip(chip)}
-                      onDelete={(chip) => handleDeleteChip(chip)}
-                    />
-                  </Grid>
+                <ChipInput
+                  // style={{ height: "56px" }}
+                  margin="normal"
+                  color="primary"
+                  label="Buscar por etiquetas #"
+                  variant="outlined"
+                  fullWidth
+                  // helperText={"Puedes agregar hasta 4 etiquetas"}
+                  value={chipInput}
+                  onAdd={(chip) => handleAddChip(chip)}
+                  onDelete={(chip) => handleDeleteChip(chip)}
+                />
 
-                  <Grid item xs={12}>
-                    <Button
-                      startIcon={<SearchIcon />}
-                      type="submit"
-                      fullWidth
-                      variant="contained"
-                      margin="normal"
-                      // style={{ margin: "10px 0" }}
-                      // sx={{ mt: 3, mb: 2 }}
-                    >
-                      Buscar
-                    </Button>
-                  </Grid>
-                </Grid>
+                <Button
+                  startIcon={<SearchIcon />}
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  margin="normal"
+                  // style={{ margin: "10px 0" }}
+                  // sx={{ mt: 3, mb: 2 }}
+                >
+                  Buscar
+                </Button>
               </Box>
             </Box>
           </Box>

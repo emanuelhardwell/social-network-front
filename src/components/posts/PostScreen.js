@@ -52,11 +52,11 @@ export const PostScreen = () => {
     <div>
       <Navbar />
       <Container sx={{ mt: 2, mb: 4 }}>
-        <Grid marginTop={1} marginBottom={2} container align="center">
-          <Grid item xs={12} sm={6}>
+        <Grid marginTop={1} marginBottom={1} container align="center">
+          <Grid item xs={12} sm={6} marginBottom={1}>
             <PostForm />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={6} marginBottom={1}>
             <PostSearch />
           </Grid>
         </Grid>
