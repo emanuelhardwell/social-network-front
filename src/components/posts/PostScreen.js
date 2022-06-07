@@ -52,8 +52,15 @@ export const PostScreen = () => {
     <div>
       <Navbar />
       <Container sx={{ mt: 2, mb: 4 }}>
-        <PostForm />
-        <PostSearch />
+        <Grid marginTop={1} marginBottom={2} container align="center">
+          <Grid item xs={12} sm={6}>
+            <PostForm />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <PostSearch />
+          </Grid>
+        </Grid>
+
         {isLoading && (
           <Grid container spacing={3}>
             <Grid item xs={12}>

@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useDispatch, useSelector } from "react-redux";
 import { startModalClose, startModalOpen } from "../../actions/modalActions";
-import { Grid, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import { styled } from "@mui/material/styles";
@@ -19,6 +19,8 @@ import {
   startPostAdded,
   startPostUpdated,
 } from "../../actions/postActions";
+
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 const style = {
   position: "absolute",
@@ -119,14 +121,13 @@ export const PostForm = () => {
 
   return (
     <>
-      <Grid marginTop={1} marginBottom={2} container>
-        <Grid item xs={12}>
-          <Button variant="contained" onClick={handleOpen}>
-            {" "}
-            Agregar post{" "}
-          </Button>
-        </Grid>
-      </Grid>
+      <Button
+        startIcon={<AddCircleOutlineIcon />}
+        variant="contained"
+        onClick={handleOpen}
+      >
+        Agregar post
+      </Button>
 
       <Modal
         aria-labelledby="transition-modal-title"
