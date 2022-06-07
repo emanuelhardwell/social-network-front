@@ -57,6 +57,21 @@ export const startPostDeleted = (id) => {
   };
 };
 
+export const startPostSearched = (search, tags) => {
+  return async (dispatch) => {
+    const res = await fetchWithToken(
+      `post/search?searchQuery=${search}&tags=${tags}`
+    );
+    const body = await res.json();
+
+    if (body.ok) {
+      dispatch(postsGeted(body.posts));
+    } else {
+      Swal.fire("Error", body.msg, "error");
+    }
+  };
+};
+
 export const startPostUpdated = (post, id) => {
   return async (dispatch) => {
     const res = await fetchWithTokenAndFile(`post/${id}`, post, "PUT");

@@ -43,7 +43,7 @@ export const startAuthCheckingFinish = () => {
       localStorage.setItem("token-init-date", new Date().getTime());
       dispatch(login({ uid: body.uid, name: body.name }));
     } else {
-      Swal.fire("Error", body.msg, "error");
+      // Swal.fire("Error", body.msg, "error");
       dispatch(authCheckingFinish());
     }
   };

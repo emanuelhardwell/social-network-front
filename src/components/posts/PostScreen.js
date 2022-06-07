@@ -1,5 +1,5 @@
 import { Container, Grid } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../../actions/postActions";
 import { Navbar } from "../ui/Navbar";
@@ -25,6 +25,8 @@ import { LikeButton } from "./LikeButton";
 import { PostForm } from "./PostForm";
 import { DeleteButton } from "./DeleteButton";
 import { UpdateBotton } from "./UpdateBotton";
+import { PostSearch } from "./PostSearch";
+import { LoadingRoller } from "../loaders/LoadingRoller";
 
 var relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
@@ -36,9 +38,14 @@ export const PostScreen = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.posts);
   const { uid } = useSelector((state) => state.auth);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     dispatch(getPosts());
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
   }, [dispatch]);
 
   return (
@@ -46,9 +53,28 @@ export const PostScreen = () => {
       <Navbar />
       <Container sx={{ mt: 2, mb: 4 }}>
         <PostForm />
+        <PostSearch />
+        {isLoading && (
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <LoadingRoller />
+            </Grid>
+          </Grid>
+        )}
+
+        {!posts.length && (
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Typography textAlign="center" gutterBottom>
+                No hay publicaciones
+              </Typography>
+            </Grid>
+          </Grid>
+        )}
+
         <Grid container spacing={3}>
           {posts.map((post) => (
-            <Grid key={post?._id} item xs={12} sm={6} md={4}>
+            <Grid key={post?._id} item xs={12} sm={6} md={4} lg={3}>
               <Card sx={{ maxWidth: 345 }} elevation={6}>
                 <CardHeader
                   avatar={
