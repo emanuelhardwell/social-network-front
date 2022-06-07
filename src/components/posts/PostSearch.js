@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { startPostSearched } from "../../actions/postActions";
+import { useHistory } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -14,7 +15,6 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 300,
   bgcolor: "background.paper",
-  // border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
@@ -22,6 +22,7 @@ const style = {
 export const PostSearch = () => {
   const dispatch = useDispatch();
   const [modalOpen, setModalOpen] = useState(false);
+  const history = useHistory();
 
   const [chipInput, setChipInput] = useState([]);
   const [searchInput, setSearchInput] = useState("");
@@ -29,8 +30,8 @@ export const PostSearch = () => {
   const handleOpen = () => setModalOpen(true);
   const handleClose = () => {
     setModalOpen(false);
-    // dispatch(postClearActive());
-    // setFormValues(initialState);
+    setSearchInput("");
+    setChipInput([]);
   };
 
   const handleAddChip = (chip) => {
@@ -61,6 +62,7 @@ export const PostSearch = () => {
     let tagsJoin = chipInput.join(",");
 
     dispatch(startPostSearched(searchInput, tagsJoin));
+    history.push(`/post/search?searchQuery=${searchInput}&tags=${tagsJoin}`);
     handleClose();
   };
 
@@ -89,7 +91,6 @@ export const PostSearch = () => {
           <Box sx={style}>
             <Box
               sx={{
-                // marginTop: 8,
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -98,7 +99,6 @@ export const PostSearch = () => {
               <Box component="form" onSubmit={handleSubmit} noValidate>
                 <TextField
                   margin="normal"
-                  // style={{ margin: "10px 0" }}
                   fullWidth
                   label="Buscar por título"
                   value={searchInput}
@@ -107,7 +107,6 @@ export const PostSearch = () => {
                 />
 
                 <ChipInput
-                  // style={{ height: "56px" }}
                   margin="normal"
                   color="primary"
                   label="Buscar por etiquetas #"
@@ -125,8 +124,6 @@ export const PostSearch = () => {
                   fullWidth
                   variant="contained"
                   margin="normal"
-                  // style={{ margin: "10px 0" }}
-                  // sx={{ mt: 3, mb: 2 }}
                 >
                   Buscar
                 </Button>

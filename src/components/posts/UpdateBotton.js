@@ -9,7 +9,7 @@ export const UpdateBotton = ({ post }) => {
 
   const handleUpdated = async (post) => {
     const result = await Swal.fire({
-      title: "¿Está seguro de editar este post?",
+      title: "¿Está seguro de editar esta publicación?",
       text: "¡No podrás revertir esto!",
       icon: "warning",
       showCancelButton: true,

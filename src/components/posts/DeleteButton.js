@@ -9,7 +9,7 @@ export const DeleteButton = ({ idPost }) => {
 
   const handleDelete = async (id) => {
     const result = await Swal.fire({
-      title: "¿Está seguro de eliminar este post?",
+      title: "¿Está seguro de eliminar esta publicación?",
       text: "¡No podrás revertir esto!",
       icon: "warning",
       showCancelButton: true,

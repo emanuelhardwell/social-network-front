@@ -29,7 +29,6 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 300,
   bgcolor: "background.paper",
-  // border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
@@ -94,7 +93,6 @@ export const PostForm = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      //   dispatch(startUploading(file));
       setImage(file);
     }
   };
@@ -126,7 +124,7 @@ export const PostForm = () => {
         variant="contained"
         onClick={handleOpen}
       >
-        Agregar post
+        Crear publicación
       </Button>
 
       <Modal
@@ -144,21 +142,15 @@ export const PostForm = () => {
           <Box sx={style}>
             <Box
               sx={{
-                // marginTop: 8,
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
               }}
             >
               <Typography component="h1" variant="h5">
-                Crear post
+                {postActive ? "Editar publicación" : "Crear publicación"}
               </Typography>
-              <Box
-                component="form"
-                onSubmit={handleSubmit}
-                noValidate
-                // sx={{ mt: 1 }}
-              >
+              <Box component="form" onSubmit={handleSubmit} noValidate>
                 <TextField
                   margin="normal"
                   required
