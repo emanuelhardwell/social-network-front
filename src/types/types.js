@@ -8,6 +8,7 @@ export const types = {
 
   postsGeted: "[POST] geted",
   postAdded: "[POST] added",
+  postsPaginated: "[POST] paginated",
   postUpdated: "[POST] updated",
   postDeleted: "[POST] deleted",
   postLiked: "[POST] liked",

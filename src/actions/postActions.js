@@ -16,6 +16,25 @@ export const getPosts = () => {
   };
 };
 
+export const getPostsPagination = (page) => {
+  return async (dispatch) => {
+    const res = await fetchWithToken(`post/posts?page=${page}`);
+    const body = await res.json();
+
+    if (body.ok) {
+      dispatch(
+        postsPaginated({
+          currentPage: body.currentPage,
+          numberOfPages: body.numberOfPages,
+          posts: body.posts,
+        })
+      );
+    } else {
+      Swal.fire("Error", body.msg, "error");
+    }
+  };
+};
+
 export const startPostLiked = (id) => {
   return async (dispatch) => {
     const res = await fetchWithToken(`post/like/${id}`, {}, "PUT");
@@ -119,6 +138,11 @@ const postLiked = (post) => ({
 
 const postsGeted = (posts) => ({
   type: types.postsGeted,
+  payload: posts,
+});
+
+const postsPaginated = (posts) => ({
+  type: types.postsPaginated,
   payload: posts,
 });
 
