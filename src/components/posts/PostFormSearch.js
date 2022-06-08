@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { startPostSearched } from "../../actions/postActions";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -19,10 +19,10 @@ const style = {
   p: 4,
 };
 
-export const PostSearch = () => {
+export const PostFormSearch = () => {
   const dispatch = useDispatch();
   const [modalOpen, setModalOpen] = useState(false);
-  const history = useHistory();
+  // const history = useHistory();
 
   const [chipInput, setChipInput] = useState([]);
   const [searchInput, setSearchInput] = useState("");
@@ -62,7 +62,7 @@ export const PostSearch = () => {
     let tagsJoin = chipInput.join(",");
 
     dispatch(startPostSearched(searchInput, tagsJoin));
-    history.push(`/post/search?searchQuery=${searchInput}&tags=${tagsJoin}`);
+    // history.push(`/post/search?searchQuery=${searchInput}&tags=${tagsJoin}`);
     handleClose();
   };
 

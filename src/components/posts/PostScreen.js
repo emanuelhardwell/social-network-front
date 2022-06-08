@@ -5,8 +5,8 @@ import { getPosts } from "../../actions/postActions";
 import { Navbar } from "../ui/Navbar";
 
 import Typography from "@mui/material/Typography";
-import { PostForm } from "./PostForm";
-import { PostSearch } from "./PostSearch";
+import { PostFormAdd } from "./PostFormAdd";
+import { PostFormSearch } from "./PostFormSearch";
 import { LoadingRoller } from "../loaders/LoadingRoller";
 import { PostCard } from "./PostCard";
 
@@ -35,10 +35,10 @@ export const PostScreen = () => {
       <Container sx={{ mt: 2, mb: 4 }}>
         <Grid marginTop={1} marginBottom={1} container align="center">
           <Grid item xs={12} sm={6} marginBottom={1}>
-            <PostForm />
+            <PostFormAdd />
           </Grid>
           <Grid item xs={12} sm={6} marginBottom={1}>
-            <PostSearch />
+            <PostFormSearch />
           </Grid>
         </Grid>
 

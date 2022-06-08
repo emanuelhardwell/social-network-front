@@ -80,8 +80,10 @@ export const startPostUpdated = (post, id) => {
     if (body.ok) {
       dispatch(postUpdated(body.post));
       toast.success(body.msg);
+      dispatch(postClearActive());
     } else {
       Swal.fire("Error", body.msg, "error");
+      dispatch(postClearActive());
     }
   };
 };

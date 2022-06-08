@@ -43,7 +43,7 @@ const initialState = {
   tags: "",
 };
 
-export const PostForm = () => {
+export const PostFormAdd = () => {
   const dispatch = useDispatch();
   const { postActive } = useSelector((state) => state.posts);
   const { modalOpen } = useSelector((state) => state.modal);
