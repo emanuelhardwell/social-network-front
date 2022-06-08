@@ -13,6 +13,7 @@ import { LoadingRoller } from "../components/loaders/LoadingRoller";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { PostScreenPaginate } from "../components/posts/PostScreenPaginate";
 
 export const AppRouter = () => {
   const dispatch = useDispatch();
@@ -35,6 +36,13 @@ export const AppRouter = () => {
               exact
               path="/"
               component={PostScreen}
+              isAuthenticated={!!uid}
+            />
+
+            <PrivateRouter
+              exact
+              path="/posts"
+              component={PostScreenPaginate}
               isAuthenticated={!!uid}
             />
             <PublicRouter
