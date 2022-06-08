@@ -9,9 +9,10 @@ import { PostFormAdd } from "./PostFormAdd";
 import { PostFormSearch } from "./PostFormSearch";
 import { LoadingRoller } from "../loaders/LoadingRoller";
 import { PostCard } from "./PostCard";
-import { useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-import Pagination from "@mui/material/Pagination";
+import { Pagination, PaginationItem } from "@mui/material";
+import { Link } from "react-router-dom";
 
 // var relativeTime = require("dayjs/plugin/relativeTime");
 // dayjs.extend(relativeTime);
@@ -25,28 +26,23 @@ export const PostScreenPaginate = () => {
     (state) => state.posts
   );
   const [isLoading, setIsLoading] = useState(false);
-  const history = useHistory();
+  const location = useLocation();
 
   const useQuery = () => {
-    // return new URLSearchParams(useLocation().search);
-    return new URLSearchParams(history.location.search);
+    return new URLSearchParams(location.search);
   };
 
   const query = useQuery();
   const page = query.get("page") || 1;
 
-  const handlePageChange = (event, value) => {
-    // setPage(value);
-    // console.log(value);
-    dispatch(getPostsPagination(value));
-  };
-
   useEffect(() => {
-    setIsLoading(true);
-    dispatch(getPostsPagination(page));
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
+    if (page) {
+      setIsLoading(true);
+      dispatch(getPostsPagination(page));
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+    }
   }, [dispatch, page]);
 
   return (
@@ -59,6 +55,25 @@ export const PostScreenPaginate = () => {
           </Grid>
           <Grid item xs={12} sm={6} marginBottom={1}>
             <PostFormSearch />
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={3} margin={3}>
+          <Grid item xs={12}>
+            {numberOfPages && currentPage && (
+              <Pagination
+                count={numberOfPages}
+                page={currentPage}
+                color="primary"
+                renderItem={(item) => (
+                  <PaginationItem
+                    component={Link}
+                    to={`posts${item.page === 1 ? "" : `?page=${item.page}`}`}
+                    {...item}
+                  />
+                )}
+              />
+            )}
           </Grid>
         </Grid>
 
@@ -79,17 +94,6 @@ export const PostScreenPaginate = () => {
             </Grid>
           </Grid>
         )}
-
-        <Grid container spacing={3} margin={3}>
-          <Grid item xs={12}>
-            <Pagination
-              count={numberOfPages}
-              page={currentPage}
-              onChange={handlePageChange}
-              color="primary"
-            />
-          </Grid>
-        </Grid>
 
         <Grid container spacing={3}>
           {posts.map((post) => (
