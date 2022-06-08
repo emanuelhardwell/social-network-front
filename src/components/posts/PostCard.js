@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid, Tooltip } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -74,15 +74,17 @@ export const PostCard = ({ post }) => {
         </CardContent>
         <CardActions disableSpacing>
           <LikeButton likes={post.likes} idPost={post._id} />
+          <Tooltip title="Compartir">
+            <IconButton aria-label="share">
+              <ShareIcon />
+            </IconButton>
+          </Tooltip>
 
-          <IconButton aria-label="share">
-            <ShareIcon />
-          </IconButton>
           {post?.user?._id === uid && (
-            <>
+            <div style={{ marginLeft: "auto" }}>
               <DeleteButton idPost={post._id} />
               <UpdateBotton post={post} />
-            </>
+            </div>
           )}
         </CardActions>
       </Card>

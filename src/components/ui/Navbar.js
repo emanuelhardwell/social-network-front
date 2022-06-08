@@ -15,6 +15,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { startLogout } from "../../actions/authActions";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 // const pages = ["Home", "Pricing", "Blog"];
 // const settings = ["Perfil", "Cuenta", "Dashboard", "Salir"];
@@ -122,8 +124,8 @@ export const Navbar = () => {
                 display: { xs: "flex", md: "none" },
                 flexGrow: 1,
                 fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
+                fontWeight: 300,
+                letterSpacing: ".0rem",
                 color: "inherit",
                 textDecoration: "none",
               }}
@@ -159,7 +161,7 @@ export const Navbar = () => {
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
+              <Tooltip title="Abrir configuración">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
                   <Avatar>{name.charAt(0).toUpperCase()}</Avatar>
@@ -187,11 +189,19 @@ export const Navbar = () => {
                   </MenuItem>
                 ))} */}
                 <MenuItem onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">Perfil </Typography>
+                  <Typography textAlign="center">
+                    <IconButton>
+                      <AccountCircleIcon color="primary" />
+                    </IconButton>
+                    Perfil
+                  </Typography>
                 </MenuItem>
                 <MenuItem onClick={handleCloseUserMenu}>
                   <Typography textAlign="center" onClick={handleLogout}>
-                    Salir{" "}
+                    <IconButton>
+                      <LogoutIcon color="error" />
+                    </IconButton>
+                    Salir
                   </Typography>
                 </MenuItem>
               </Menu>

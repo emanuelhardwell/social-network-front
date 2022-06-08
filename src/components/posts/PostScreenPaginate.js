@@ -58,10 +58,11 @@ export const PostScreenPaginate = () => {
           </Grid>
         </Grid>
 
-        <Grid container spacing={3} margin={3}>
+        <Grid marginTop={1} marginBottom={2} container>
           <Grid item xs={12}>
             {numberOfPages && currentPage && (
               <Pagination
+                sx={{ display: "flex", justifyContent: "center" }}
                 count={numberOfPages}
                 page={currentPage}
                 color="primary"

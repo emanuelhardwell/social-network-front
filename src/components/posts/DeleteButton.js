@@ -26,10 +26,7 @@ export const DeleteButton = ({ idPost }) => {
   return (
     <>
       <Tooltip title="Eliminar">
-        <IconButton
-          sx={{ marginLeft: "auto" }}
-          onClick={() => handleDelete(idPost)}
-        >
+        <IconButton onClick={() => handleDelete(idPost)}>
           <DeleteForeverIcon color="error" />
         </IconButton>
       </Tooltip>

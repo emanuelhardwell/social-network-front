@@ -26,10 +26,7 @@ export const UpdateBotton = ({ post }) => {
   return (
     <>
       <Tooltip title="Editar">
-        <IconButton
-          sx={{ marginLeft: "auto" }}
-          onClick={() => handleUpdated(post)}
-        >
+        <IconButton onClick={() => handleUpdated(post)}>
           <EditIcon color="primary" />
         </IconButton>
       </Tooltip>
