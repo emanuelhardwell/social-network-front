@@ -18,6 +18,7 @@ import { LikeButton } from "./LikeButton";
 import { DeleteButton } from "./DeleteButton";
 import { UpdateBotton } from "./UpdateBotton";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 var relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
@@ -27,6 +28,12 @@ dayjs.extend(localeData);
 
 export const PostCard = ({ post }) => {
   const { uid } = useSelector((state) => state.auth);
+  const history = useHistory();
+
+  const handleClickPost = (id) => {
+    // console.log(id);
+    history.push(`post/${id}`);
+  };
 
   return (
     <Grid key={post?._id} item xs={12} sm={6} md={4} lg={3}>
@@ -50,6 +57,7 @@ export const PostCard = ({ post }) => {
           height="194"
           image={post?.imageUrl}
           alt={post?.title}
+          onClick={() => handleClickPost(post._id)}
         />
         <CardContent>
           <Typography marginBottom={2} variant="body1" color="text.primary">

@@ -21,7 +21,6 @@ export const getPostById = (id) => {
     const res = await fetchWithToken(`post/post/${id}`);
     const body = await res.json();
 
-    console.log(body);
     if (body.ok) {
       dispatch(postGetedById(body.post));
     } else {
