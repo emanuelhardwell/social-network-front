@@ -16,6 +16,20 @@ export const getPosts = () => {
   };
 };
 
+export const getPostById = (id) => {
+  return async (dispatch) => {
+    const res = await fetchWithToken(`post/post/${id}`);
+    const body = await res.json();
+
+    console.log(body);
+    if (body.ok) {
+      dispatch(postGetedById(body.post));
+    } else {
+      Swal.fire("Error", body.msg, "error");
+    }
+  };
+};
+
 export const getPostsPagination = (page) => {
   return async (dispatch) => {
     const res = await fetchWithToken(`post/posts?page=${page}`);
@@ -139,6 +153,11 @@ const postLiked = (post) => ({
 const postsGeted = (posts) => ({
   type: types.postsGeted,
   payload: posts,
+});
+
+const postGetedById = (post) => ({
+  type: types.postGetedById,
+  payload: post,
 });
 
 const postsPaginated = (posts) => ({

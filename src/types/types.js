@@ -7,6 +7,7 @@ export const types = {
   authLogout: "[AUTH] logout",
 
   postsGeted: "[POST] geted",
+  postGetedById: "[POST] getedById",
   postAdded: "[POST] added",
   postsPaginated: "[POST] paginated",
   postUpdated: "[POST] updated",

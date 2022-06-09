@@ -13,6 +13,12 @@ export const postReducer = (state = initialState, action) => {
         posts: [...action.payload],
       };
 
+    case types.postGetedById:
+      return {
+        ...state,
+        posts: [action.payload],
+      };
+
     case types.postsPaginated:
       return {
         ...state,
