@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../../actions/postActions";
 import { Navbar } from "../ui/Navbar";
 
-import Typography from "@mui/material/Typography";
 import { PostFormAdd } from "./PostFormAdd";
 import { PostFormSearch } from "./PostFormSearch";
-import { LoadingRoller } from "../loaders/LoadingRoller";
 import { PostCard } from "./PostCard";
+import { PostLoading } from "./PostLoading";
+import { PostNotFound } from "./PostNotFound";
 
 // var relativeTime = require("dayjs/plugin/relativeTime");
 // dayjs.extend(relativeTime);
@@ -42,23 +42,9 @@ export const PostScreen = () => {
           </Grid>
         </Grid>
 
-        {isLoading && (
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <LoadingRoller />
-            </Grid>
-          </Grid>
-        )}
+        {isLoading && <PostLoading />}
 
-        {!posts.length && (
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <Typography textAlign="center" gutterBottom>
-                No hay publicaciones
-              </Typography>
-            </Grid>
-          </Grid>
-        )}
+        {posts.length < 1 && <PostNotFound />}
 
         <Grid container spacing={3}>
           {posts.map((post) => (

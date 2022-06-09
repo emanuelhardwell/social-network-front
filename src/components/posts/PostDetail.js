@@ -26,7 +26,8 @@ import { red } from "@mui/material/colors";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostById } from "../../actions/postActions";
 import { useParams } from "react-router-dom";
-import { LoadingRoller } from "../loaders/LoadingRoller";
+import { PostLoading } from "./PostLoading";
+import { PostNotFound } from "./PostNotFound";
 
 var relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
@@ -55,13 +56,9 @@ export const PostDetail = () => {
     <>
       <Navbar />
 
-      {isLoading && (
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <LoadingRoller />
-          </Grid>
-        </Grid>
-      )}
+      {isLoading && <PostLoading />}
+
+      {posts.length < 1 && <PostNotFound />}
 
       <Container sx={{ mt: 2, mb: 4 }}>
         <Grid container spacing={3}>
