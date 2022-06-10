@@ -6,8 +6,10 @@ import {
   CardHeader,
   CardMedia,
   Container,
+  Divider,
   Grid,
   IconButton,
+  Paper,
   Tooltip,
   Typography,
 } from "@mui/material";
@@ -28,12 +30,36 @@ import { getPostById } from "../../actions/postActions";
 import { useParams } from "react-router-dom";
 import { PostLoading } from "./PostLoading";
 import { PostNotFound } from "./PostNotFound";
+import { styled } from "@mui/material/styles";
 
 var relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
 dayjs.locale("es", es); //AQUI PROBABLEMENTE HAYA UN PROBLEMA *****
 dayjs.extend(localeData);
+
+const ImageSection = styled("div")(({ theme }) => ({
+  marginLeft: "20px",
+  [theme.breakpoints.down("sm")]: {
+    marginLeft: 0,
+  },
+}));
+
+const CardSection = styled("div")(({ theme }) => ({
+  display: "flex",
+  width: "100%",
+  [theme.breakpoints.down("sm")]: {
+    flexWrap: "wrap",
+    flexDirection: "column",
+  },
+}));
+
+const RecommendedPosts = styled("div")(({ theme }) => ({
+  display: "flex",
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column",
+  },
+}));
 
 export const PostDetail = () => {
   const dispatch = useDispatch();
@@ -56,11 +82,88 @@ export const PostDetail = () => {
     <>
       <Navbar />
 
-      {isLoading && <PostLoading />}
+      <Container sx={{ mt: 2, mb: 4 }} maxWidth="xl">
+        {isLoading && <PostLoading />}
 
-      {posts.length < 1 && <PostNotFound />}
+        {posts.length < 1 && <PostNotFound />}
 
-      <Container sx={{ mt: 2, mb: 4 }}>
+        {posts.map((post) => (
+          <Paper
+            key={post._id}
+            style={{ padding: "20px", borderRadius: "15px" }}
+            elevation={6}
+          >
+            <CardSection>
+              <div sx={{ borderRadius: "20px", margin: "10px", flex: 1 }}>
+                <Typography variant="h3" component="h2">
+                  {post?.title}
+                </Typography>
+                <Typography
+                  variant="h6"
+                  component="h2"
+                  color="textSeconday"
+                  gutterBottom
+                >
+                  {post?.tags.map((tag) => (
+                    <Typography
+                      color="primary"
+                      variant="text"
+                      fontSize={14}
+                      key={tag}
+                    >
+                      #{tag}{" "}
+                    </Typography>
+                  ))}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  component="p"
+                  color="textSeconday"
+                  gutterBottom
+                >
+                  {post?.description}
+                </Typography>
+                <Typography variant="h6"> {post?.user?.name} </Typography>
+                <Typography variant="body1">
+                  {dayjs(post?.createdAtDate).fromNow()}
+                </Typography>
+
+                <Divider style={{ margin: "20px 0" }} />
+                <Typography variant="body1">
+                  <strong> Realtime chat - Coming soon!! </strong>
+                </Typography>
+
+                <Divider style={{ margin: "20px 0" }} />
+                <Typography variant="body1">
+                  <strong> Comments - Coming soon!! </strong>
+                </Typography>
+
+                <Divider style={{ margin: "20px 0" }} />
+              </div>
+
+              <ImageSection>
+                <CardMedia
+                  component="img"
+                  sx={{
+                    borderRadius: "20px",
+                    objectFit: "cover",
+                    with: "100%",
+                    maxHeight: "600px",
+                  }}
+                  src={post?.imageUrl}
+                  alt={post.title}
+                />
+              </ImageSection>
+            </CardSection>
+
+            <RecommendedPosts>
+              <Typography component="h5">Publicaciones recomendadas</Typography>
+            </RecommendedPosts>
+          </Paper>
+        ))}
+      </Container>
+
+      {/* <Container sx={{ mt: 2, mb: 4 }}>
         <Grid container spacing={3}>
           {posts.map((post) => (
             <Grid key={post?._id} item xs={12} sm={6} md={4} lg={3}>
@@ -132,7 +235,7 @@ export const PostDetail = () => {
             </Grid>
           ))}
         </Grid>
-      </Container>
+      </Container> */}
     </>
   );
 };

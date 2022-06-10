@@ -53,6 +53,7 @@ export const PostCard = ({ post }) => {
           subheader={dayjs(post?.createdAtDate).fromNow()}
         />
         <CardMedia
+          style={{ cursor: "pointer" }}
           component="img"
           height="194"
           image={post?.imageUrl}
