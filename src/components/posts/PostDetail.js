@@ -27,10 +27,11 @@ import es from "dayjs/locale/es";
 import { red } from "@mui/material/colors";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostById } from "../../actions/postActions";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { PostLoading } from "./PostLoading";
 import { PostNotFound } from "./PostNotFound";
 import { styled } from "@mui/material/styles";
+import { Return } from "./Return";
 
 var relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
@@ -67,6 +68,15 @@ export const PostDetail = () => {
   const { posts } = useSelector((state) => state.posts);
   const params = useParams();
   const [isLoading, setIsLoading] = useState(false);
+  const history = useHistory();
+
+  const handleClickBackHistory = () => {
+    if (history.length > 2) {
+      history.goBack();
+    } else {
+      history.push("/posts");
+    }
+  };
 
   useEffect(() => {
     if (params && params.id) {
@@ -161,6 +171,7 @@ export const PostDetail = () => {
             </RecommendedPosts>
           </Paper>
         ))}
+        <Return handleClickBackHistory={handleClickBackHistory} />
       </Container>
 
       {/* <Container sx={{ mt: 2, mb: 4 }}>
