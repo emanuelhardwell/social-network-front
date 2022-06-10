@@ -46,7 +46,7 @@ export const LikeButton = ({ likes, idPost }) => {
 
       <Typography component="span">
         {" "}
-        {likes.length > 0 ? likes.length : ""}
+        {likes?.length > 0 ? likes?.length : ""}
       </Typography>
     </>
   );

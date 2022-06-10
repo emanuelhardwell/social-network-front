@@ -16,7 +16,7 @@ export const postReducer = (state = initialState, action) => {
     case types.postGetedById:
       return {
         ...state,
-        posts: [action.payload],
+        post: action.payload,
       };
 
     case types.postsPaginated:

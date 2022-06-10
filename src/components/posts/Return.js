@@ -6,7 +6,7 @@ export const Return = ({ handleClickBackHistory }) => {
     <>
       <Box sx={{ "& > :not(style)": { m: 1 } }}>
         <Fab
-          sx={{ position: "absolute", bottom: 16, right: 16 }}
+          sx={{ position: "fixed", bottom: 16, right: 16 }}
           color="primary"
           aria-label="regresar"
           onClick={handleClickBackHistory}
