@@ -11,8 +11,7 @@ import React, { useEffect, useState } from "react";
 import { capitalizeFirstLetter } from "../../helpers/capitalizeFirstLetter";
 import { Navbar } from "../ui/Navbar";
 
-import dayjs, { localeData } from "dayjs";
-import es from "dayjs/locale/es";
+
 import { useDispatch, useSelector } from "react-redux";
 import { getPostById } from "../../actions/postActions";
 import { useHistory, useParams } from "react-router-dom";
@@ -24,7 +23,10 @@ import { red } from "@mui/material/colors";
 import { PostDetailComment } from "./PostDetailComment";
 import { PostDetailForm } from "./PostDetailForm";
 
-var relativeTime = require("dayjs/plugin/relativeTime");
+// dayjs
+import dayjs, { localeData } from "dayjs";
+import es from "dayjs/locale/es";
+const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
 dayjs.locale("es", es); //AQUI PROBABLEMENTE HAYA UN PROBLEMA *****
@@ -161,7 +163,7 @@ export const PostDetail = () => {
 
           <Grid container>
             <Grid item xs={12} sm={6} md={6} padding="20px">
-              <PostDetailForm />
+              <PostDetailForm postId={post?._id} />
               <PostDetailComment post={post} />
             </Grid>
           </Grid>

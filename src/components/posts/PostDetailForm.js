@@ -2,16 +2,25 @@ import { Box, Button, TextField } from "@mui/material";
 import React from "react";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { startPostCommented } from "../../actions/postActions";
 
-export const PostDetailForm = () => {
+export const PostDetailForm = ({ postId }) => {
+  const dispatch = useDispatch();
   const [comment, setComment] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (comment.trim().length < 4) {
-      return Swal.fire("Info", "Asegurate de escribir un comentario", "info");
+      return Swal.fire(
+        "Info",
+        "Asegurate de escribir un comentario mayor a 3 caracteres",
+        "info"
+      );
     }
+    dispatch(startPostCommented(postId, comment));
+    setComment("");
   };
 
   return (

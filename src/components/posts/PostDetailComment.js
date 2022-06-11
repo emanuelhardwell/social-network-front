@@ -8,9 +8,17 @@ import {
   Typography,
 } from "@mui/material";
 import { teal } from "@mui/material/colors";
-import dayjs from "dayjs";
 import React from "react";
 import { capitalizeFirstLetter } from "../../helpers/capitalizeFirstLetter";
+
+// dayjs
+import dayjs, { localeData } from "dayjs";
+import es from "dayjs/locale/es";
+const relativeTime = require("dayjs/plugin/relativeTime");
+dayjs.extend(relativeTime);
+
+dayjs.locale("es", es); //AQUI PROBABLEMENTE HAYA UN PROBLEMA *****
+dayjs.extend(localeData);
 
 export const PostDetailComment = ({ post }) => {
   return (
@@ -32,13 +40,16 @@ export const PostDetailComment = ({ post }) => {
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
-                primary={`${
-                  comment?.user?.name &&
-                  capitalizeFirstLetter(comment?.user?.name)
-                }  ${
-                  comment?.user?.lastname &&
-                  capitalizeFirstLetter(comment?.user?.lastname)
-                }`}
+                primary={
+                  <>
+                    <Typography fontSize="14px" fontWeight="bold">
+                      {comment?.user?.name &&
+                        capitalizeFirstLetter(comment?.user?.name)}{" "}
+                      {comment?.user?.lastname &&
+                        capitalizeFirstLetter(comment?.user?.lastname)}
+                    </Typography>
+                  </>
+                }
                 secondary={
                   <>
                     <>
@@ -47,6 +58,7 @@ export const PostDetailComment = ({ post }) => {
                         component="span"
                         variant="body2"
                         color="text.primary"
+                        fontSize="14px"
                       >
                         {comment?.comment}{" "}
                       </Typography>
@@ -57,10 +69,10 @@ export const PostDetailComment = ({ post }) => {
                         component="span"
                         variant="body2"
                         color="text.secondary"
-                        fontSize="13px"
+                        fontSize="12px"
                       >
                         {"----- "}
-                        {dayjs(comment?.createdAt).fromNow()}
+                        {dayjs(comment?.createdAtDate).fromNow()}
                       </Typography>
                     </>
                   </>
