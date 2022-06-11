@@ -19,6 +19,12 @@ export const postReducer = (state = initialState, action) => {
         post: action.payload,
       };
 
+    case types.postCommented:
+      return {
+        ...state,
+        post: action.payload,
+      };
+
     case types.postsPaginated:
       return {
         ...state,

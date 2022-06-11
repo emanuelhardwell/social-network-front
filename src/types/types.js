@@ -13,6 +13,7 @@ export const types = {
   postUpdated: "[POST] updated",
   postDeleted: "[POST] deleted",
   postLiked: "[POST] liked",
+  postCommented: "[POST] commented",
   postSetActive: "[POST] set active",
   postClearActive: "[POST] clear active",
   postLogout: "[POST] logout",

@@ -61,6 +61,19 @@ export const startPostLiked = (id) => {
   };
 };
 
+export const startPostCommented = (id, comment) => {
+  return async (dispatch) => {
+    const res = await fetchWithToken(`post/comment/${id}`, { comment }, "PUT");
+    const body = await res.json();
+
+    if (body.ok) {
+      dispatch(postCommented(body.post));
+    } else {
+      Swal.fire("Error", body.msg, "error");
+    }
+  };
+};
+
 export const startPostAdded = (post) => {
   return async (dispatch) => {
     const res = await fetchWithTokenAndFile("post/", post, "POST");
@@ -146,6 +159,11 @@ const postUpdated = (post) => ({
 
 const postLiked = (post) => ({
   type: types.postLiked,
+  payload: post,
+});
+
+const postCommented = (post) => ({
+  type: types.postCommented,
   payload: post,
 });
 
