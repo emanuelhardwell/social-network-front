@@ -22,6 +22,7 @@ import { styled } from "@mui/material/styles";
 import { Return } from "./Return";
 import { red } from "@mui/material/colors";
 import { PostDetailComment } from "./PostDetailComment";
+import { PostDetailForm } from "./PostDetailForm";
 
 var relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
@@ -160,6 +161,7 @@ export const PostDetail = () => {
 
           <Grid container>
             <Grid item xs={12} sm={6} md={6} padding="20px">
+              <PostDetailForm />
               <PostDetailComment post={post} />
             </Grid>
           </Grid>

@@ -13,7 +13,6 @@ import React from "react";
 import { capitalizeFirstLetter } from "../../helpers/capitalizeFirstLetter";
 
 export const PostDetailComment = ({ post }) => {
-  console.log(post);
   return (
     <>
       <Typography variant="h6" component="h3">
