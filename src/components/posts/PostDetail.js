@@ -21,6 +21,7 @@ import { PostNotFound } from "./PostNotFound";
 import { styled } from "@mui/material/styles";
 import { Return } from "./Return";
 import { red } from "@mui/material/colors";
+import { PostDetailComment } from "./PostDetailComment";
 
 var relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
@@ -90,7 +91,7 @@ export const PostDetail = () => {
             <Grid item xs={12} sm={6} md={6} padding="20px">
               <div>
                 <Typography component="h2" variant="h5" gutterBottom>
-                  {capitalizeFirstLetter(post?.title)}
+                  <strong>{capitalizeFirstLetter(post?.title)}</strong>
                 </Typography>
                 <Typography component="h3" variant="subtitle1" gutterBottom>
                   {capitalizeFirstLetter(post?.description)}
@@ -154,6 +155,12 @@ export const PostDetail = () => {
                 image={post?.imageUrl}
                 alt={post?.title}
               />
+            </Grid>
+          </Grid>
+
+          <Grid container>
+            <Grid item xs={12} sm={6} md={6} padding="20px">
+              <PostDetailComment post={post} />
             </Grid>
           </Grid>
         </Paper>
