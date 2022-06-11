@@ -91,7 +91,11 @@ export const PostCard = ({ post }) => {
 
           {post?.user?._id === uid && (
             <div style={{ marginLeft: "auto" }}>
-              <DeleteButton idPost={post._id} />
+              <DeleteButton
+                id={post._id}
+                question="¿Está seguro de eliminar esta publicación?"
+                isPost={true}
+              />
               <UpdateBotton post={post} />
             </div>
           )}

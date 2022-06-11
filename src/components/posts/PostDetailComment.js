@@ -14,6 +14,8 @@ import { capitalizeFirstLetter } from "../../helpers/capitalizeFirstLetter";
 // dayjs
 import dayjs, { localeData } from "dayjs";
 import es from "dayjs/locale/es";
+import { DeleteButton } from "./DeleteButton";
+import { useSelector } from "react-redux";
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
@@ -21,6 +23,8 @@ dayjs.locale("es", es); //AQUI PROBABLEMENTE HAYA UN PROBLEMA *****
 dayjs.extend(localeData);
 
 export const PostDetailComment = ({ post }) => {
+  const { uid } = useSelector((state) => state.auth);
+
   return (
     <>
       <Typography variant="h6" component="h3">
@@ -78,7 +82,18 @@ export const PostDetailComment = ({ post }) => {
                   </>
                 }
               />
+              {comment?.user?._id === uid && (
+                <div>
+                  <DeleteButton
+                    id={post?._id}
+                    idComment={comment?._id}
+                    question="¿Está seguro de eliminar este comentario?"
+                    isPost={false}
+                  />
+                </div>
+              )}
             </ListItem>
+
             <Divider variant="inset" component="li" />
           </div>
         ))}
