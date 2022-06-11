@@ -102,6 +102,24 @@ export const startPostDeleted = (id) => {
   };
 };
 
+export const startPostCommentDeleted = (idPost, idComment) => {
+  return async (dispatch) => {
+    const res = await fetchWithToken(
+      `post/comment/search?idPost=${idPost}&idComment=${idComment}`,
+      {},
+      "DELETE"
+    );
+    const body = await res.json();
+
+    if (body.ok) {
+      dispatch(postCommentDeleted(body.post));
+      toast.success(body.msg, { autoClose: 4000 });
+    } else {
+      Swal.fire("Error", body.msg, "error");
+    }
+  };
+};
+
 export const startPostSearched = (search, tags) => {
   return async (dispatch) => {
     const res = await fetchWithToken(
@@ -173,6 +191,11 @@ const postsGeted = (posts) => ({
 });
 
 const postGetedById = (post) => ({
+  type: types.postGetedById,
+  payload: post,
+});
+
+const postCommentDeleted = (post) => ({
   type: types.postGetedById,
   payload: post,
 });
