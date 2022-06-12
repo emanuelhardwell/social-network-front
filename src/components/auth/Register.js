@@ -31,7 +31,11 @@ const Copyright = (props) => {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://www.instagram.com/emanuel.hardwell">
+      <Link
+        color="inherit"
+        href="https://www.instagram.com/emanuel.hardwell"
+        target="_blank"
+      >
         Emanuel Hardwell
       </Link>{" "}
       {new Date().getFullYear()}
@@ -98,7 +102,7 @@ export const Register = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Registrarse
+            Crea tu cuenta
           </Typography>
           <Box
             component="form"
@@ -110,7 +114,7 @@ export const Register = () => {
               margin="normal"
               required
               fullWidth
-              label="Name"
+              label="Nombre"
               name="name"
               value={name}
               onChange={handleInputChange}
@@ -140,7 +144,7 @@ export const Register = () => {
               margin="normal"
               required
               fullWidth
-              label="Email Address"
+              label="Correo"
               name="email"
               value={email}
               onChange={handleInputChange}
@@ -151,9 +155,10 @@ export const Register = () => {
               margin="normal"
               fullWidth
               variant="outlined"
+              required
             >
               <InputLabel htmlFor="outlined-adornment-password">
-                Password
+                Contraseña
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password"
@@ -173,7 +178,7 @@ export const Register = () => {
                     </IconButton>
                   </InputAdornment>
                 }
-                label="Password"
+                label="Contraseña"
               />
             </FormControl>
 
@@ -182,9 +187,10 @@ export const Register = () => {
               margin="normal"
               fullWidth
               variant="outlined"
+              required
             >
               <InputLabel htmlFor="outlined-adornment-password2">
-                Password
+                Repetir contraseña
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password2"
@@ -204,7 +210,7 @@ export const Register = () => {
                     </IconButton>
                   </InputAdornment>
                 }
-                label="Password"
+                label="Repetir contraseña"
               />
             </FormControl>
 
@@ -214,7 +220,7 @@ export const Register = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Registrarse
             </Button>
 
             <Grid container justifyContent="flex-end">

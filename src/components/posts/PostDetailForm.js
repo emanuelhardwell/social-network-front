@@ -27,9 +27,11 @@ export const PostDetailForm = ({ postId }) => {
     <>
       <Box
         sx={{
-          display: "flex",
+          // display: "flex",
           flexDirection: "column",
-          alignItems: "center",
+          alignItems: "flex-start",
+          width: "100%",
+          maxWidth: 600,
         }}
       >
         <Box component="form" onSubmit={handleSubmit} noValidate>

@@ -31,7 +31,11 @@ const Copyright = (props) => {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://www.instagram.com/emanuel.hardwell">
+      <Link
+        color="inherit"
+        href="https://www.instagram.com/emanuel.hardwell"
+        target="_blank"
+      >
         Emanuel Hardwell
       </Link>{" "}
       {new Date().getFullYear()}
@@ -96,7 +100,7 @@ export const Login = () => {
               margin="normal"
               required
               fullWidth
-              label="Email Address"
+              label="Correo"
               name="email"
               value={email}
               onChange={handleInputChange}
@@ -107,9 +111,10 @@ export const Login = () => {
               margin="normal"
               fullWidth
               variant="outlined"
+              required
             >
               <InputLabel htmlFor="outlined-adornment-password">
-                Password
+                Contraseña
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password"
@@ -129,7 +134,7 @@ export const Login = () => {
                     </IconButton>
                   </InputAdornment>
                 }
-                label="Password"
+                label="Contraseña"
               />
             </FormControl>
 
@@ -139,7 +144,7 @@ export const Login = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Iniciar sesión
             </Button>
 
             <Grid container>
