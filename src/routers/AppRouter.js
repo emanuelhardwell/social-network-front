@@ -35,7 +35,7 @@ export const AppRouter = () => {
           <Switch>
             <PrivateRouter
               exact
-              path="/"
+              path="/jajaj"
               component={PostScreen}
               isAuthenticated={!!uid}
             />
@@ -66,7 +66,7 @@ export const AppRouter = () => {
               component={Register}
               isAuthenticated={!!uid}
             />
-            <Redirect to="/" />
+            <Redirect to="/posts" />
           </Switch>
         </div>
       </Router>
