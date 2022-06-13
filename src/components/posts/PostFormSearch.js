@@ -98,7 +98,8 @@ export const PostFormSearch = () => {
             >
               <Box component="form" onSubmit={handleSubmit} noValidate>
                 <TextField
-                  margin="normal"
+                  color="primary"
+                  // margin="normal"
                   fullWidth
                   label="Buscar por título"
                   value={searchInput}
@@ -119,6 +120,7 @@ export const PostFormSearch = () => {
                 />
 
                 <Button
+                  sx={{ marginTop: "10px" }}
                   startIcon={<SearchIcon />}
                   type="submit"
                   fullWidth

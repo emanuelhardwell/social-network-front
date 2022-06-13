@@ -184,7 +184,7 @@ export const PostFormAdd = () => {
                 />
 
                 <Stack
-                  marginTop={1}
+                  marginTop={2}
                   direction="row"
                   alignItems="center"
                   spacing={2}
