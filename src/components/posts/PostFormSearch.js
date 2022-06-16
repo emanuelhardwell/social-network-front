@@ -1,12 +1,11 @@
 import { Backdrop, Box, Button, Fade, Modal, TextField } from "@mui/material";
-import ChipInput from "material-ui-chip-input";
 import SearchIcon from "@mui/icons-material/Search";
+import { TagsInput } from "react-tag-input-component";
 
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { startPostSearched } from "../../actions/postActions";
-// import { useHistory } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -22,25 +21,15 @@ const style = {
 export const PostFormSearch = () => {
   const dispatch = useDispatch();
   const [modalOpen, setModalOpen] = useState(false);
-  // const history = useHistory();
 
-  const [chipInput, setChipInput] = useState([]);
+  const [tag, setTag] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
   const handleOpen = () => setModalOpen(true);
   const handleClose = () => {
     setModalOpen(false);
     setSearchInput("");
-    setChipInput([]);
-  };
-
-  const handleAddChip = (chip) => {
-    setChipInput([...chipInput, chip]);
-  };
-
-  const handleDeleteChip = (chipId) => {
-    const data = chipInput.filter((chip) => chip !== chipId);
-    setChipInput(data);
+    setTag([]);
   };
 
   const handleKeyUp = (e) => {
@@ -52,17 +41,16 @@ export const PostFormSearch = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (chipInput.length > 4) {
+    if (tag.length > 4) {
       return Swal.fire(
         "Información",
         "Solamente puedes agregar 5 etiquetas #",
         "info"
       );
     }
-    let tagsJoin = chipInput.join(",");
+    let tagsJoin = tag.join(",");
 
     dispatch(startPostSearched(searchInput, tagsJoin));
-    // history.push(`/post/search?searchQuery=${searchInput}&tags=${tagsJoin}`);
     handleClose();
   };
 
@@ -98,26 +86,31 @@ export const PostFormSearch = () => {
             >
               <Box component="form" onSubmit={handleSubmit} noValidate>
                 <TextField
+                  style={{ marginBottom: "10px" }}
                   color="primary"
                   // margin="normal"
                   fullWidth
-                  label="Buscar por título"
+                  label="Título"
                   value={searchInput}
                   onKeyUp={handleKeyUp}
                   onChange={(e) => setSearchInput(e.target.value)}
                 />
 
-                <ChipInput
-                  margin="normal"
-                  color="primary"
-                  label="Buscar por etiquetas #"
-                  variant="outlined"
-                  fullWidth
-                  // helperText={"Puedes agregar hasta 4 etiquetas"}
-                  value={chipInput}
-                  onAdd={(chip) => handleAddChip(chip)}
-                  onDelete={(chip) => handleDeleteChip(chip)}
-                />
+                <div style={{ width: "100%" }}>
+                  <TagsInput
+                    style={{ width: "100%" }}
+                    value={tag}
+                    onChange={setTag}
+                    name="tag"
+                    placeHolder="Etiquetas"
+                  />
+                  <span>
+                    <small>
+                      &nbsp; Presione enter para añadir una nueva etiqueta
+                      &nbsp; &nbsp; &nbsp;
+                    </small>
+                  </span>
+                </div>
 
                 <Button
                   sx={{ marginTop: "10px" }}

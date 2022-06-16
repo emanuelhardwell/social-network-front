@@ -174,6 +174,7 @@ export const PostFormAdd = () => {
                 />
 
                 <TextField
+                  helperText="Separar las etiquetas por coma"
                   margin="normal"
                   required
                   fullWidth
