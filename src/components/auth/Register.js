@@ -45,12 +45,12 @@ const Copyright = (props) => {
 };
 
 const initialState = {
-  name: "ema",
-  lastname: "lopez",
-  lastname2: "sanchez",
-  email: "ema@gmail.com",
-  password: "emanuel100",
-  password2: "emanuel100",
+  name: "",
+  lastname: "",
+  lastname2: "",
+  email: "",
+  password: "",
+  password2: "",
 };
 
 export const Register = () => {

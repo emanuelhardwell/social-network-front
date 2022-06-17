@@ -45,8 +45,8 @@ const Copyright = (props) => {
 };
 
 const initialState = {
-  email: "ema@gmail.com",
-  password: "emanuel100",
+  email: "",
+  password: "",
 };
 
 export const Login = () => {
