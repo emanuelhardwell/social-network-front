@@ -174,11 +174,11 @@ export const PostFormAdd = () => {
                 />
 
                 <TextField
-                  helperText="Separar las etiquetas por coma"
+                  helperText="Separar por coma (ej. ---> gato,animal,mascota)"
                   margin="normal"
                   required
                   fullWidth
-                  label="Tags"
+                  label="Etiquetas"
                   name="tags"
                   value={tags}
                   onChange={handleInputChange}
